@@ -18,71 +18,71 @@ Every part of the macro sequence is single command which should be registered as
 
 There cannot be macro calls with same key presses.
 
-Also user can specify delay between single keypress combination, default is 50ms
+Also user can specify delay between single keypress combination, default is 50ms, and he can specify color offset with will be calculated between all rgb colors, default is 10 which means red component +-10, green component +-10, blue component +-10
 
 ```
-  keypressDelay=150;
-
-  Main {
-      Z + ctrl : Tab ;
-      X + ctrl : Tab + shift;
-      C + ctrl : Tab, Ctrl + C, Tab;
-      V + ctrl : Tab, Tab, Ctrl + V, Tab, Tab;
-  };
+keypressDelay = 60;
+colorOffset = 15;
+Main {
+    Z + Ctrl : Tab ;
+    X + Ctrl : Tab + Shift;
+    C + Ctrl : Tab, Ctrl + C, Tab;
+    V + Ctrl : Tab, Tab, Ctrl + V, Tab, Tab;
+};
 ```
 
 ### Sleep
 For sleep to work we will add it as command and it will support passing milliseconds that will pause execution of the macro, after timer rans out, macro continues executing as intended.
 
 ```
-  Main {
-      Z + ctrl : Tab ;
-      X + ctrl : Tab + shift;
-      C + ctrl : Tab, sleep(250), Ctrl + C, Tab;
-      V + ctrl : Tab, Tab, Ctrl + V, sleep(1000), Tab;
-  };
+Main {
+    Z + Ctrl : Tab;
+    X + Ctrl : Tab + Shift;
+    C + Ctrl : Tab, sleep(250), Ctrl + C, Tab;
+    V + Ctrl : Tab, Tab, Ctrl + V, sleep(1000), Tab;
+};
 ```
 
 ### randomSleep
 Random sleep is a little bit different than regular sleep, with this we pass minimum and maximum value we want command to sleep, program will the pick a random number that it will sleep from the desired spectrum
 
 ```
-  Main {
-      Z + ctrl : Tab;
-      X + ctrl : Tab + shift;
-      C + ctrl : Tab, randomSleep(200,400), Ctrl + C, Tab;
-      V + ctrl : Tab, Tab, Ctrl + V, sleep(500,1500), Tab;
-  };
+Main {
+    Z + Ctrl : Tab;
+    X + Ctrl : Tab + Shift;
+    C + Ctrl : Tab, randomSleep(200,400), Ctrl + C, Tab;
+    V + Ctrl : Tab, Tab, Ctrl + V, sleep(500), Tab;
+};
 ```
 
 ### macro loop
 Loop function in commands will enable user to loop trough commands or sequence of commands. Also what was not mentioned it is possible to add right and left mouse click as commands.
 
 ```
-  Main {
-      Z + ctrl : Tab ;
-      X + ctrl : Tab + shift;
-      C + ctrl : loop(4, Tab), Ctrl + C, loop(2, Tab);
-      V + ctrl : loop(4, Tab), Ctrl + V, loop(2, Tab);
-      A + ctrl : loop(2, leftClick), randomSleep(200,400), loop(2, [shift + Q, shift + W, shift + E]);
-  };
+Main {
+    Z + Ctrl : Tab ;
+    X + Ctrl : Tab + Shift;
+    C + Ctrl : loop(4, [Tab]), Ctrl + C, loop(2, [Tab]);
+    V + Ctrl : loop(4, [Tab]), Ctrl + V, loop(2, [Tab]);
+    A + Ctrl : loop(2, [leftClick]), randomSleep(200,400), loop(2, [shift + Q, Shift + W, Shift + E]);
+};
 ```
 
 ### macro function
 Functions similar to programming are sequence of commands that can be used instead of rewritting big parts of macros.
 
 ```
-  miniSLeep: randomSleep(200,400);
-  bigSleep: sleep(500,1500);
-  save: Ctrl + V;
-  copy: Ctrl + C;
+miniSleep(): randomSleep(200,400);
+bigSleep(): sleep(500);
+save(): Ctrl + V;
+copy(): Ctrl + C;
 
-  Main {
-      Z + ctrl : Tab;
-      X + ctrl : Tab + shift;
-      C + ctrl : Tab, miniSLeep, copy, Tab;
-      V + ctrl : Tab, Tab, save, bigSleep, Tab;
-  };
+Main {
+    Z + Ctrl : Tab;
+    X + Ctrl : Tab + Shift;
+    C + Ctrl : Tab, miniSleep(), copy(), Tab;
+    V + Ctrl : Tab, Tab, save(), bigSleep(), Tab;
+};
 ```
 
 Every part of the macro sequence is single command which should be registered as single input(Similar as pressing ctrl and V at the same time).
@@ -104,38 +104,39 @@ if there is offset in color, there is a way to pick hex color and to register of
 
 function if example:
 ```
+writeName(trimLetters :boolean): D,U, {if(trimLetters):[S];else:[Š]}, A, N;
+loopName(loopTimes: number) : loop(loopTimes, [writeName(true)]);
+myMinLoop(loopCounter: number): {if(loopCounter < 5):[loopName(5)];};
 
-  writeName(trimLetters :boolean): D,U, (if(trimLetters):S:else:Š), A, N;
-  loopName(times: number) : loop(5, writeName(true));
-
-  Main {
-      Z + ctrl : Tab;
-      X + ctrl : Tab + shift;
-      C + ctrl : loop(4, Tab), Ctrl + C, loop(2, Tab);
-      V + ctrl : loop(4, Tab), Ctrl + V, loop(2, Tab);
-      D + ctrl : loopName(24);
-  };
+Main {
+    Z + Ctrl : Tab;
+    X + Ctrl : Tab + Shift;
+    C + Ctrl : loop(4, [Tab]), Ctrl + C, loop(2, [Tab]);
+    V + Ctrl : loop(4, [Tab]), Ctrl + V, loop(2, [Tab]);
+    D + Ctrl : loopName(24);
+    T + Ctrl : myMinLoop(3);
+};
 ```
 
 cursor color example:
 ```
-  heal: 1;
+heal(): 1;
 
-  Main {
-      Z + ctrl : Tab;
-      X + ctrl : Tab + shift;
-      D + ctrl : (ifCursor(#FF0000) : heal);
-  };
+Main {
+    Z + Ctrl : Tab;
+    X + Ctrl : Tab + Shift;
+    D + Ctrl : {ifCursor(#FF0000) : [heal()]};
+};
 ```
 
 ### auto macros
 For example, we want to execute macro when color of single pixel on the screen is changed, we specify color we want  to execute code, with or without offset and macro fill execute just when pixel takes that color.
 ```
-  heal: 1;
+heal(): 1;
 
-  Main {
-      Z + ctrl : Tab;
-      X + ctrl : Tab + shift;
-      onColor(#FF0000) : heal;
-  };
+Main {
+    Z + ctrl : Tab;
+    X + ctrl : Tab + shift;
+    onColor(#FF0000,  1720, 720) : heal();
+};
 ```

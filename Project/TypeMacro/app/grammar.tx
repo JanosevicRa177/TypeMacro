@@ -1,0 +1,104 @@
+Program:
+    KeypressDelay?
+    ColorOffset?
+    functions*=Function
+    'Main {'
+        commands+=Command
+    '};'
+;
+
+ColorOffset:
+    'colorOffset' '=' offset=INT';'
+;
+
+KeypressDelay:
+    'keypressDelay' '=' keypressDelay=INT';'
+;
+
+Parameter:
+    name=ID ':' Type
+;
+
+Function:
+    name=ID  '(' parameters*=Parameter[','] ')' ':' sequence+=SequencePart[','] ';'
+;
+
+Macro:
+    keys*=Key['+']
+;
+
+Comparison:
+    left=ID op=Comparator right=INT
+;
+
+Condition:
+    Comparison | identifier=[Parameter]
+;
+
+ElseStatement:
+    'else' ':' '[' elseSequence+=SequencePart[','] ']'
+;
+
+IfCommand:
+    '{' 'if(' condition=Condition ')'':' '[' ifSequence+=SequencePart[','] ']' ';' ElseStatement? '}'
+;
+
+IfCursorCommand:
+    '{' 'ifCursor(' color=Color ')'':' '[' ifSequence+=SequencePart[','] ']''}'
+;
+
+RandomSleep:
+    'randomSleep(' min=INT ','  max=INT ')'
+;
+
+Sleep:
+    'sleep(' sleepValue=INT ')'
+;
+
+SleepCommand:
+    Sleep|RandomSleep
+;
+
+LoopIterator:
+    repetitions=INT|loopParameter=[Parameter]
+;
+
+LoopCommand:
+    'loop(' loopIterator=LoopIterator ',' '['sequence+=SequencePart[','] ']'')'
+;
+
+Attribute:
+    BOOL | INT | parameter=[Parameter]
+;
+
+SequencePart:
+    IfCursorCommand|IfCommand|LoopCommand|SleepCommand|func=[Function] '(' attribute*=Attribute[','] ')'|Macro
+;
+
+MacroCommand:
+    macro=Macro ':' sequence+=SequencePart[','] ';'
+;
+
+AutoPixelColorCommand:
+    'onColor(' color=Color ',' x=INT ',' y=INT ')' ':' sequence+=SequencePart[','] ';'
+;
+
+Command:
+    AutoPixelColorCommand | MacroCommand
+;
+
+Key:
+    /rightClick|leftClick|[cC]trl|[aA]lt|[Tt]ab|[Ss]hift|[a-zA-ZŠĐĆČŽšđćčž]|F[1-9]|F1[0-2]|[0-9]/
+;
+
+Color:
+    /#[A-Fa-f0-9]{6}/
+;
+
+Type:
+    'number'|'boolean'|'string'
+;
+
+Comparator:
+    '<' | '>' | '<=' | '>=' | '==' | '!='
+;

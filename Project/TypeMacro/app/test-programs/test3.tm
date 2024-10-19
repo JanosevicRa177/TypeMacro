@@ -1,0 +1,7 @@
+Main {
+    Z + Ctrl : Tab ;
+    X + Ctrl : Tab + Shift;
+    C + Ctrl : loop(4, [Tab]), Ctrl + C, loop(2, [Tab]);
+    V + Ctrl : loop(4, [Tab]), Ctrl + V, loop(2, [Tab]);
+    A + Ctrl : loop(2, [leftClick]), randomSleep(200,400), loop(2, [shift + Q, Shift + W, Shift + E]);
+};

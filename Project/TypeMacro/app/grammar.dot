@@ -1,0 +1,46 @@
+
+    digraph textX {
+    fontname = "Bitstream Vera Sans"
+    fontsize = 8
+    node[
+        shape=record,
+        style=filled,
+        fillcolor=aliceblue
+    ]
+    nodesep = 0.3
+    edge[dir=black,arrowtail=empty]
+
+
+2692299383440[ label="{Program|}"]
+
+2692299385424[ label="{Macro|keys: optional\<list[Key]\>\l}"]
+
+2692299387408[ label="{*SleepCommand|}"]
+
+2692299359632[ label="{*SequencePart|}"]
+
+2692299370544[ label="{RandomSleep|min: INT\lmax: INT\l}"]
+
+2692299369552[ label="{Sleep|sleepValue: INT\l}"]
+
+2692299396336[ label="{MacroSequence|}"]
+
+2692299393360[ label="{KeypressDelay|keypressDelay: INT\l}"]
+
+
+
+2692299383440 -> 2692299396336[arrowtail=diamond, dir=both, headlabel="commands 1..*"]
+2692299387408 -> 2692299369552 [dir=back]
+2692299387408 -> 2692299370544 [dir=back]
+2692299359632 -> 2692299385424 [dir=back]
+2692299359632 -> 2692299387408 [dir=back]
+2692299396336 -> 2692299385424[arrowtail=diamond, dir=both, headlabel="macro "]
+2692299396336 -> 2692299359632[headlabel="sequence 1..*"]
+match_rules [ shape=plaintext, label=< <table>
+	<tr>
+		<td><b>Key</b></td><td>[a-zA-Z]\b|\bF[1-9]|F1[0-2]\b|\b[cC]trl\b|\b[aA]lt\b|\b[Tt]ab\b|\b[Ss]hift</td>
+	</tr>
+</table> >]
+
+
+}
