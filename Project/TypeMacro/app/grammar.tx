@@ -1,6 +1,6 @@
 Program:
-    KeypressDelay?
-    ColorOffset?
+    keypressDelay=KeypressDelay?
+    colorOffset=ColorOffset?
     functions*=Function
     'Main {'
         commands+=Command
@@ -12,11 +12,11 @@ ColorOffset:
 ;
 
 KeypressDelay:
-    'keypressDelay' '=' keypressDelay=INT';'
+    'keypressDelay' '=' keypress_delay=INT';'
 ;
 
 Parameter:
-    name=ID ':' Type
+    name=ID ':' type=Type
 ;
 
 Function:
@@ -28,23 +28,23 @@ Macro:
 ;
 
 Comparison:
-    left=ID op=Comparator right=INT
+    left=ID operator=Comparator right=INT
 ;
 
 Condition:
-    Comparison | identifier=[Parameter]
+    comparison=Comparison | identifier=[Parameter]
 ;
 
 ElseStatement:
-    'else' ':' '[' elseSequence+=SequencePart[','] ']'
+    'else' ':' '[' else_sequence+=SequencePart[','] ']'
 ;
 
 IfCommand:
-    '{' 'if(' condition=Condition ')'':' '[' ifSequence+=SequencePart[','] ']' ';' ElseStatement? '}'
+    '{' 'if(' condition=Condition ')'':' '[' if_sequence+=SequencePart[','] ']' ';' else_statement=ElseStatement? '}'
 ;
 
 IfCursorCommand:
-    '{' 'ifCursor(' color=Color ')'':' '[' ifSequence+=SequencePart[','] ']''}'
+    '{' 'ifCursor(' color=Color ')'':' '[' if_sequence+=SequencePart[','] ']''}'
 ;
 
 RandomSleep:
@@ -60,19 +60,19 @@ SleepCommand:
 ;
 
 LoopIterator:
-    repetitions=INT|loopParameter=[Parameter]
+    repetitions=INT|loop_parameter=[Parameter]
 ;
 
 LoopCommand:
-    'loop(' loopIterator=LoopIterator ',' '['sequence+=SequencePart[','] ']'')'
+    'loop(' loop_iterator=LoopIterator ',' '['sequence+=SequencePart[','] ']'')'
 ;
 
 Attribute:
-    BOOL | INT | parameter=[Parameter]
+    bool=BOOL | int=INT | parameter=[Parameter]
 ;
 
 SequencePart:
-    IfCursorCommand|IfCommand|LoopCommand|SleepCommand|func=[Function] '(' attribute*=Attribute[','] ')'|Macro
+    if_cursor=IfCursorCommand|if_=IfCommand|loop=LoopCommand|sleep=SleepCommand| func_call=[Function] '(' attributes*=Attribute[','] ')'|macro=Macro
 ;
 
 MacroCommand:
@@ -84,7 +84,7 @@ AutoPixelColorCommand:
 ;
 
 Command:
-    AutoPixelColorCommand | MacroCommand
+    auto_pixel_command=AutoPixelColorCommand | macro_command=MacroCommand
 ;
 
 Key:
