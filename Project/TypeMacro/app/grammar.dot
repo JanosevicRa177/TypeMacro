@@ -11,80 +11,89 @@
     edge[dir=black,arrowtail=empty]
 
 
-2044145438464[ label="{Program|}"]
+1867981755952[ label="{Program|}"]
 
-2044145453344[ label="{ColorOffset|offset: INT\l}"]
+1867981756944[ label="{ColorOffset|offset: INT\l}"]
 
-2044145435488[ label="{KeypressDelay|keypress_delay: INT\l}"]
+1867981757936[ label="{KeypressDelay|keypress_delay: INT\l}"]
 
-2044145437472[ label="{Parameter|name: ID\ltype: Type\l}"]
+1867981766864[ label="{Parameter|name: ID\ltype: Type\l}"]
 
-2044145439456[ label="{Function|name: ID\l}"]
+1867981759920[ label="{Attribute|int: INT\lbool: BOOL\l}"]
 
-2044145444416[ label="{Macro|keys: optional\<list[Key]\>\l}"]
+1867981763888[ label="{Function|name: ID\l}"]
 
-2044145460288[ label="{Comparison|left: ID\lop: Comparator\lright: INT\l}"]
+1867981768848[ label="{Macro|keys: optional\<list[Key]\>\l}"]
 
-2044145458304[ label="{Condition|}"]
+1867981761904[ label="{Comparison|operator: Comparator\l}"]
 
-2044145340256[ label="{ElseStatement|}"]
+1867981765872[ label="{Condition|}"]
 
-2044145339264[ label="{IfCommand|}"]
+1867981769840[ label="{ElseStatement|}"]
 
-2044145362080[ label="{IfCursorCommand|color: Color\l}"]
+1867981770832[ label="{IfCommand|}"]
 
-2044145342240[ label="{RandomSleep|min: INT\lmax: INT\l}"]
+1867981661712[ label="{IfCursorCommand|color: Color\l}"]
 
-2044145357120[ label="{Sleep|sleepValue: INT\l}"]
+1867981666672[ label="{RandomSleep|}"]
 
-2044145358112[ label="{*SleepCommand|}"]
+1867981654768[ label="{Sleep|}"]
 
-2044145334304[ label="{LoopIterator|repetitions: INT\l}"]
+1867981652784[ label="{*SleepCommand|}"]
 
-2044145335296[ label="{LoopCommand|}"]
+1867981672624[ label="{LoopIterator|}"]
 
-2044145351168[ label="{Attribute|bool: BOOL\lint: INT\l}"]
+1867981657744[ label="{LoopCommand|}"]
 
-2044145341248[ label="{SequencePart|}"]
+1867981643856[ label="{FunCall|}"]
 
-2044145344224[ label="{MacroCommand|}"]
+1867981668656[ label="{SequencePart|}"]
 
-2044145356128[ label="{AutoPixelColorCommand|color: Color\lx: INT\ly: INT\l}"]
+1867981667664[ label="{MacroCommand|}"]
 
-2044145354144[ label="{*Command|}"]
+1867981659728[ label="{AutoPixelColorCommand|color: Color\lx: INT\ly: INT\l}"]
+
+1867981649808[ label="{Command|}"]
 
 
 
-2044145438464 -> 2044145435488[arrowtail=diamond, dir=both, headlabel="keypressDelay "]
-2044145438464 -> 2044145453344[arrowtail=diamond, dir=both, headlabel="colorOffset "]
-2044145438464 -> 2044145439456[arrowtail=diamond, dir=both, headlabel="functions 0..*"]
-2044145438464 -> 2044145354144[arrowtail=diamond, dir=both, headlabel="commands 1..*"]
-2044145439456 -> 2044145437472[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
-2044145439456 -> 2044145341248[arrowtail=diamond, dir=both, headlabel="sequence 1..*"]
-2044145458304 -> 2044145437472[headlabel="identifier "]
-2044145340256 -> 2044145341248[arrowtail=diamond, dir=both, headlabel="else_sequence 1..*"]
-2044145339264 -> 2044145458304[arrowtail=diamond, dir=both, headlabel="condition "]
-2044145339264 -> 2044145341248[arrowtail=diamond, dir=both, headlabel="if_sequence 1..*"]
-2044145339264 -> 2044145340256[arrowtail=diamond, dir=both, headlabel="else_statement "]
-2044145362080 -> 2044145341248[arrowtail=diamond, dir=both, headlabel="if_sequence 1..*"]
-2044145358112 -> 2044145357120 [dir=back]
-2044145358112 -> 2044145342240 [dir=back]
-2044145334304 -> 2044145437472[headlabel="loop_parameter "]
-2044145335296 -> 2044145334304[arrowtail=diamond, dir=both, headlabel="loop_iterator "]
-2044145335296 -> 2044145341248[arrowtail=diamond, dir=both, headlabel="sequence 1..*"]
-2044145351168 -> 2044145437472[headlabel="parameter "]
-2044145341248 -> 2044145362080[arrowtail=diamond, dir=both, headlabel="if_cursor "]
-2044145341248 -> 2044145339264[arrowtail=diamond, dir=both, headlabel="if_ "]
-2044145341248 -> 2044145335296[arrowtail=diamond, dir=both, headlabel="loop "]
-2044145341248 -> 2044145358112[arrowtail=diamond, dir=both, headlabel="sleep "]
-2044145341248 -> 2044145439456[headlabel="func_call "]
-2044145341248 -> 2044145351168[arrowtail=diamond, dir=both, headlabel="attributes 0..*"]
-2044145341248 -> 2044145444416[arrowtail=diamond, dir=both, headlabel="macro "]
-2044145344224 -> 2044145444416[arrowtail=diamond, dir=both, headlabel="macro "]
-2044145344224 -> 2044145341248[arrowtail=diamond, dir=both, headlabel="sequence 1..*"]
-2044145356128 -> 2044145341248[arrowtail=diamond, dir=both, headlabel="sequence 1..*"]
-2044145354144 -> 2044145356128 [dir=back]
-2044145354144 -> 2044145344224 [dir=back]
+1867981755952 -> 1867981757936[arrowtail=diamond, dir=both, headlabel="keypressDelay "]
+1867981755952 -> 1867981756944[arrowtail=diamond, dir=both, headlabel="colorOffset "]
+1867981755952 -> 1867981763888[arrowtail=diamond, dir=both, headlabel="functions 0..*"]
+1867981755952 -> 1867981649808[arrowtail=diamond, dir=both, headlabel="commands 1..*"]
+1867981759920 -> 1867981766864[headlabel="parameter "]
+1867981763888 -> 1867981766864[arrowtail=diamond, dir=both, headlabel="parameters 0..*"]
+1867981763888 -> 1867981668656[arrowtail=diamond, dir=both, headlabel="sequence 1..*"]
+1867981761904 -> 1867981759920[arrowtail=diamond, dir=both, headlabel="left "]
+1867981761904 -> 1867981759920[arrowtail=diamond, dir=both, headlabel="right "]
+1867981765872 -> 1867981761904[arrowtail=diamond, dir=both, headlabel="comparison "]
+1867981765872 -> 1867981766864[headlabel="identifier "]
+1867981769840 -> 1867981668656[arrowtail=diamond, dir=both, headlabel="else_sequence 1..*"]
+1867981770832 -> 1867981765872[arrowtail=diamond, dir=both, headlabel="condition "]
+1867981770832 -> 1867981668656[arrowtail=diamond, dir=both, headlabel="if_sequence 1..*"]
+1867981770832 -> 1867981769840[arrowtail=diamond, dir=both, headlabel="else_statement "]
+1867981661712 -> 1867981668656[arrowtail=diamond, dir=both, headlabel="if_sequence 1..*"]
+1867981666672 -> 1867981759920[headlabel="min "]
+1867981666672 -> 1867981759920[headlabel="max "]
+1867981654768 -> 1867981759920[headlabel="sleepValue "]
+1867981652784 -> 1867981654768 [dir=back]
+1867981652784 -> 1867981666672 [dir=back]
+1867981672624 -> 1867981759920[headlabel="attribute "]
+1867981657744 -> 1867981672624[arrowtail=diamond, dir=both, headlabel="loop_iterator "]
+1867981657744 -> 1867981668656[arrowtail=diamond, dir=both, headlabel="sequence 1..*"]
+1867981643856 -> 1867981763888[headlabel="func "]
+1867981643856 -> 1867981759920[arrowtail=diamond, dir=both, headlabel="attributes 0..*"]
+1867981668656 -> 1867981661712[arrowtail=diamond, dir=both, headlabel="if_cursor "]
+1867981668656 -> 1867981770832[arrowtail=diamond, dir=both, headlabel="if_ "]
+1867981668656 -> 1867981657744[arrowtail=diamond, dir=both, headlabel="loop "]
+1867981668656 -> 1867981652784[arrowtail=diamond, dir=both, headlabel="sleep "]
+1867981668656 -> 1867981643856[arrowtail=diamond, dir=both, headlabel="func_call "]
+1867981668656 -> 1867981768848[arrowtail=diamond, dir=both, headlabel="macro "]
+1867981667664 -> 1867981768848[arrowtail=diamond, dir=both, headlabel="macro "]
+1867981667664 -> 1867981668656[arrowtail=diamond, dir=both, headlabel="sequence 1..*"]
+1867981659728 -> 1867981668656[arrowtail=diamond, dir=both, headlabel="sequence 1..*"]
+1867981649808 -> 1867981659728[arrowtail=diamond, dir=both, headlabel="auto_pixel_command "]
+1867981649808 -> 1867981667664[arrowtail=diamond, dir=both, headlabel="macro_command "]
 match_rules [ shape=plaintext, label=< <table>
 	<tr>
 		<td><b>Color</b></td><td>#[A-Fa-f0-9]{6}</td>
@@ -94,6 +103,9 @@ match_rules [ shape=plaintext, label=< <table>
 	</tr>
 	<tr>
 		<td><b>Key</b></td><td>rightClick|leftClick|[cC]trl|[aA]lt|[Tt]ab|[Ss]hift|[a-zA-ZŠĐĆČŽšđćčž]|F[1-9]|F1[0-2]|[0-9]</td>
+	</tr>
+	<tr>
+		<td><b>Keyword</b></td><td>sleep|loop|randomSleep</td>
 	</tr>
 	<tr>
 		<td><b>Type</b></td><td>number|boolean|string</td>

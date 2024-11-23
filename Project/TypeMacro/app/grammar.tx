@@ -19,6 +19,10 @@ Parameter:
     name=ID ':' type=Type
 ;
 
+Attribute:
+     int=INT | bool=BOOL | parameter=[Parameter]
+;
+
 Function:
     name=ID  '(' parameters*=Parameter[','] ')' ':' sequence+=SequencePart[','] ';'
 ;
@@ -28,7 +32,7 @@ Macro:
 ;
 
 Comparison:
-    left=ID operator=Comparator right=INT
+    left=Attribute operator=Comparator right=Attribute
 ;
 
 Condition:
@@ -48,31 +52,23 @@ IfCursorCommand:
 ;
 
 RandomSleep:
-    'randomSleep(' min=INT ','  max=INT ')'
+    'randomSleep(' min=Attribute ','  max=Attribute ')'
 ;
 
 Sleep:
-    'sleep(' sleepValue=INT ')'
+    'sleep(' sleepValue=Attribute ')'
 ;
 
 SleepCommand:
     Sleep|RandomSleep
 ;
 
-LoopIterator:
-    repetitions=INT|loop_parameter=[Parameter]
-;
-
 LoopCommand:
-    'loop(' loop_iterator=LoopIterator ',' '['sequence+=SequencePart[','] ']'')'
-;
-
-Attribute:
-    bool=BOOL | int=INT | parameter=[Parameter]
+    'loop(' loop_iterator=Attribute ',' '['sequence+=SequencePart[','] ']'')'
 ;
 
 SequencePart:
-    if_cursor=IfCursorCommand|if_=IfCommand|loop=LoopCommand|sleep=SleepCommand| func_call=[Function] '(' attributes*=Attribute[','] ')'|macro=Macro
+    if_cursor=IfCursorCommand | if_=IfCommand |loop=LoopCommand |sleep=SleepCommand | func_call=[Function] '(' attributes*=Attribute[','] ')' | macro=Macro
 ;
 
 MacroCommand:
@@ -96,7 +92,7 @@ Color:
 ;
 
 Type:
-    'number'|'boolean'|'string'
+    'number'|'boolean'
 ;
 
 Comparator:

@@ -3,6 +3,6 @@ colorOffset = 15;
 Main {
     Z + Ctrl : Tab ;
     X + Ctrl : Tab + Shift;
-    C + Ctrl : Tab, Ctrl + C, Tab;
-    V + Ctrl : Tab, Tab, Ctrl + V, Tab, Tab;
+    C + Ctrl : Tab, Ctrl + A, Tab;
+    V + Ctrl : Tab, Tab, Ctrl + B, Tab, Tab;
 };

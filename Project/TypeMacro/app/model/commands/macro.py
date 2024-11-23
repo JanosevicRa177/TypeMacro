@@ -11,3 +11,6 @@ class Macro(Command):
 
     def run_command(self) -> bool:
         pass
+
+    def get_macro(self) -> MacroCommand:
+        return self.macro

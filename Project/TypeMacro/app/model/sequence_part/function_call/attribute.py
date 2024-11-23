@@ -1,8 +1,12 @@
 class Attribute:
+    bool_value: bool | None = None
+    int_value: int | None = None
+    parameter_name: str | None = None
 
     def __init__(self, attribute, index):
         self.value = attribute.__dir__()
-        if attribute.bool:
+        self.index = index
+        if attribute.bool is not None:
             self.bool_value = attribute.bool
         elif attribute.int:
             self.int_value = attribute.int

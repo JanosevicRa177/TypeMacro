@@ -6,6 +6,6 @@ copy(): Ctrl + C;
 Main {
     Z + Ctrl : Tab;
     X + Ctrl : Tab + Shift;
-    C + Ctrl : Tab, miniSleep(), copy(), Tab;
-    V + Ctrl : Tab, Tab, save(), bigSleep(), Tab;
+    B + Ctrl : Tab, miniSleep(), copy(), Tab;
+    A + Ctrl : Tab, Tab, save(), bigSleep(), Tab;
 };
