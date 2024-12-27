@@ -1,7 +1,5 @@
 from collections import Counter
 
-from app.model.commands.macro import Macro
-from app.model.sequence_part.macro_command.key import Key
 from app.model.sequence_part.macro_command.macro_command import MacroCommand
 
 

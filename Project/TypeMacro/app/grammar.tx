@@ -84,7 +84,7 @@ Command:
 ;
 
 Key:
-    /rightClick|leftClick|[cC]trl|[aA]lt|[Tt]ab|[Ss]hift|[a-zA-ZŠĐĆČŽšđćčž]|F[1-9]|F1[0-2]|[0-9]/
+    /rightClick|leftClick|[sS]pace|[eE]sc|[bB]ackspace|[cC]trl|[aA]lt|[Tt]ab|[Ss]hift|[a-zA-ZŠĐĆČŽšđćčž]|F[1-9]|F1[0-2]|[0-9]/
 ;
 
 Color:
