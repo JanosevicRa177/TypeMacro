@@ -34,7 +34,7 @@ def main():
     macros = load_macros()
     checker = Checker()
     [checker.detect_cycle(macro_group.full_macros, macro_group.file_name) for macro_group in macros]
-    macro_to_start = [macro for macro in macros if macro.file_name == "test11 .tm"]
+    macro_to_start = [macro for macro in macros if macro.file_name == "test2.tm"]
     interpret(macro_to_start[0])
 
 

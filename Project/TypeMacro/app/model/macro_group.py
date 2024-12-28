@@ -6,7 +6,7 @@ from app.utils import flatten_list
 
 
 class MacroGroup(Parent):
-    keypress_delay = 50
+    keypress_delay = 100
     color_offset = 10
     full_macros: list[FullMacro] | None = None
     file_name: str | None = None

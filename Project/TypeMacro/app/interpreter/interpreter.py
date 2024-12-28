@@ -1,5 +1,6 @@
 import threading
 import time
+from random import randrange
 from time import sleep
 
 from pynput.keyboard import Key, Listener, KeyCode, Controller
@@ -17,22 +18,33 @@ keypress_delay: int | None = None
 
 def execute_macro_sequence(macros: list[MacroCommand]):
     keyboard = Controller()
-    sleep(0.2)
+    sleep(keypress_delay/1000)
     for macro in macros:
+        print(macro.keys[0].value)
         if not should_listen:
             break
-        for key in macro.keys:
-            keyboard.press(to_key_code(key.value.lower()))
-        sleep(keypress_delay / 1000)
-        for key in macro.keys:
-            keyboard.release(to_key_code(key.value.lower()))
+        if macro.keys[0].value == "sleep":
+            print(sleep)
+            print(macro.keys[1].value)
+            sleep(int(macro.keys[1].value)/1000)
+        elif macro.keys[0].value == "random_sleep":
+            random_sleep_value = randrange(int(macro.keys[1].value), int(macro.keys[2].value))
+            print("random_sleep_value", random_sleep_value)
+            print(macro.keys[1].value, macro.keys[2].value)
+            sleep(random_sleep_value/1000)
+        else:
+            for key in macro.keys:
+                keyboard.press(to_key_code(key.value.lower()))
+            sleep(keypress_delay / 1000)
+            for key in macro.keys:
+                keyboard.release(to_key_code(key.value.lower()))
 
 
 def listen_to_macro(full_macro: FullMacro):
     global current_keypress_group
     macro_as_set = set([key.value.lower() for key in full_macro.macro.keys])
     while should_listen:
-        time.sleep(0.1)
+        time.sleep(keypress_delay/1000)
         if current_keypress_group == macro_as_set:
             thread = threading.Thread(target=execute_macro_sequence, args=[full_macro.sequence])
             thread.daemon = True
@@ -43,7 +55,6 @@ def interpret(macro: MacroGroup):
     global listener
     global keypress_delay
     keypress_delay = macro.keypress_delay
-    print(len(macro.full_macros))
     for macro_command in macro.full_macros:
         thread = threading.Thread(target=listen_to_macro, args=[macro_command])
         thread.daemon = True

@@ -1,6 +1,5 @@
 Main {
-    Z + Ctrl : X + Ctrl;
-    X + Ctrl : C + Ctrl;
-    C + Ctrl : V + Ctrl;
-    V + Ctrl : Z + Ctrl;
+    C + Ctrl : Ctrl + V;
+    Ctrl + x : D, U;
+    U: S, A, N;
 };

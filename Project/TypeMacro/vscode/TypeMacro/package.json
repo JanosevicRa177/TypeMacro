@@ -1,0 +1,31 @@
+{
+  "name": "Type Macro",
+  "displayName": "TypeMacro",
+  "description": "Keyboard Macro DSL",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.89.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "tm",
+      "aliases": ["Type Macro", "tm"],
+      "extensions": [".tm"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "tm",
+      "scopeName": "source.tm",
+      "path": "./syntaxes/tm.tmLanguage.json"
+    }],
+    "snippets": [
+      {
+        "language": "tm",
+        "path": "./snippets/snippets.code-snippets"
+      }
+    ]
+  }
+}

@@ -1,5 +1,6 @@
 keypressDelay = 60;
 colorOffset = 15;
+
 Main {
     Z + Ctrl : Tab ;
     X + Ctrl : Tab + Shift;

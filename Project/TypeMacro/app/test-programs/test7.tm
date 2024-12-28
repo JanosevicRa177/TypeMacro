@@ -1,7 +1,7 @@
 heal(): 1;
 
 Main {
-    Z + Ctrl : Tab;
-    X + Ctrl : Tab + Shift;
-    D + Ctrl : {ifCursor(#FF0000) : [heal()]};
+    Z + ctrl : Tab;
+    X + ctrl : Tab + shift;
+    onColor(#FF0000,  1720, 720) : heal();
 };

@@ -47,10 +47,6 @@ IfCommand:
     '{' 'if(' condition=Condition ')'':' '[' if_sequence+=SequencePart[','] ']' ';' else_statement=ElseStatement? '}'
 ;
 
-IfCursorCommand:
-    '{' 'ifCursor(' color=Color ')'':' '[' if_sequence+=SequencePart[','] ']''}'
-;
-
 RandomSleep:
     'randomSleep(' min=Attribute ','  max=Attribute ')'
 ;
@@ -68,7 +64,7 @@ LoopCommand:
 ;
 
 SequencePart:
-    if_cursor=IfCursorCommand | if_=IfCommand |loop=LoopCommand |sleep=SleepCommand | func_call=[Function] '(' attributes*=Attribute[','] ')' | macro=Macro
+    if_=IfCommand |loop=LoopCommand |sleep=SleepCommand | func_call=[Function] '(' attributes*=Attribute[','] ')' | macro=Macro
 ;
 
 MacroCommand:

@@ -1,0 +1,309 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Custom DSL",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#keywords" },
+    { "include": "#commands" },
+    { "include": "#attributes" },
+    { "include": "#types" },
+    { "include": "#comparators" },
+    { "include": "#program" },
+    { "include": "#colorOffset" },
+    { "include": "#keypressDelay" },
+    { "include": "#functions" },
+    { "include": "#macro" },
+    { "include": "#ifCommand" },
+    { "include": "#loopCommand" },
+    { "include": "#sleepCommand" },
+    { "include": "#sequencePart" },
+    { "include": "#command" },
+    { "include": "#autoPixelColorCommand" },
+    { "include": "#comparison" },
+    { "include": "#condition" },
+    { "include": "#elseStatement" },
+    { "include": "#randomSleep" },
+    { "include": "#keys" },
+    { "include": "#operators" },
+    { "include": "#comma" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line",
+          "match": "//.*"
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control",
+          "match": "\\b(if|else|loop|randomSleep|sleep|onColor|keypressDelay|colorOffset|Main)\\b"
+        }
+      ]
+    },
+    "attributes": {
+      "patterns": [
+        {
+          "name": "constant.numeric",
+          "match": "\\b\\d+\\b"
+        },
+        {
+          "name": "constant.language.boolean",
+          "match": "\\b(true|false)\\b"
+        },
+        {
+          "name": "variable.parameter",
+          "match": "\\b\\w+\\s*:\\s*(number|boolean)\\b"
+        }
+      ]
+    },
+    "types": {
+      "patterns": [
+        {
+          "name": "storage.type",
+          "match": "\\b(number|boolean)\\b"
+        }
+      ]
+    },
+    "comparators": {
+      "patterns": [
+        {
+          "name": "keyword.operator",
+          "match": "(<|>|<=|>=|==|!=)"
+        }
+      ]
+    },
+    "program": {
+      "patterns": [
+        {
+          "name": "keyword.control",
+          "match": "Program"
+        },
+        {
+          "name": "keyword.control",
+          "match": "Main"
+        }
+      ]
+    },
+    "colorOffset": {
+      "patterns": [
+        {
+          "name": "keyword.control",
+          "match": "\\bcolorOffset\\b"
+        },
+        {
+          "name": "constant.numeric",
+          "match": "\\b\\d+\\b"
+        }
+      ]
+    },
+    "keypressDelay": {
+      "patterns": [
+        {
+          "name": "keyword.control",
+          "match": "\\bkeypressDelay\\b"
+        },
+        {
+          "name": "constant.numeric",
+          "match": "\\b\\d+\\b"
+        }
+      ]
+    },
+"functions": {
+    "patterns": [
+      {
+        "name": "entity.name.function",
+        "match": "\\b\\w+(?=\\()"
+      },
+      {
+        "name": "variable.parameter",
+        "match": "\\b\\w+(?=\\s*:\\s*(number|boolean))"
+      },
+      {
+        "name": "storage.type",
+        "match": "(?<=:\\s*)(number|boolean)(?=\\b)"
+      },
+      {
+        "name": "punctuation.separator",
+        "match": ":"
+      },
+      {
+        "name": "punctuation.separator",
+        "match": ","
+      }
+    ]
+  },
+    "macro": {
+      "patterns": [
+        {
+          "name": "variable.language",
+          "match": "\\bkeys\\b"
+        },
+        {
+          "name": "operator",
+          "match": "\\+"
+        }
+      ]
+    },
+    "macroCommand": {
+      "patterns": [
+        {
+          "name": "variable.language",
+          "match": "\\bmacro\\b"
+        },
+        {
+          "name": "punctuation.separator",
+          "match": ":"
+        },
+        {
+          "name": "punctuation.separator",
+          "match": ";"
+        }
+      ]
+    },
+    "ifCommand": {
+      "patterns": [
+        {
+          "name": "keyword.control",
+          "match": "\\bif\\b\\s*\\("
+        },
+        {
+          "name": "variable.language",
+          "match": "\\b(condition)\\b"
+        }
+      ]
+    },
+    "loopCommand": {
+      "patterns": [
+        {
+          "name": "keyword.control.loop",
+          "match": "\\bloop\\b\\s*\\("
+        },
+        {
+          "name": "punctuation.definition.parameters",
+          "match": "\\("
+        },
+        {
+          "name": "punctuation.definition.parameters",
+          "match": "\\)"
+        }
+      ]
+    },
+    "sleepCommand": {
+      "patterns": [
+        {
+          "name": "keyword.control",
+          "match": "sleep"
+        },
+        {
+          "name": "constant.numeric",
+          "match": "\\b\\d+\\b"
+        }
+      ]
+    },
+    "sequencePart": {
+      "patterns": [
+        {
+          "name": "entity.name.function",
+          "match": "\\b\\w+\\s*\\("
+        }
+      ]
+    },
+    "command": {
+      "patterns": [
+        {
+          "name": "entity.name.function",
+          "match": "\\b\\w+\\s*\\("
+        },
+        {
+          "name": "variable.language",
+          "match": "\\b(sequence|keys|macro|comparison|attribute|condition)\\b"
+        }
+      ]
+    },
+    "autoPixelColorCommand": {
+      "patterns": [
+        {
+          "name": "keyword.control",
+          "match": "onColor"
+        },
+        {
+          "name": "constant.numeric",
+          "match": "\\b\\d+\\b"
+        }
+      ]
+    },
+    "comparison": {
+      "patterns": [
+        {
+          "name": "keyword.operator",
+          "match": "(<|>|<=|>=|==|!=)"
+        }
+      ]
+    },
+    "condition": {
+      "patterns": [
+        {
+          "name": "variable.language",
+          "match": "\\bcondition\\b"
+        }
+      ]
+    },
+    "elseStatement": {
+      "patterns": [
+        {
+          "name": "keyword.control",
+          "match": "\\belse\\b"
+        }
+      ]
+    },
+    "randomSleep": {
+      "patterns": [
+        {
+          "name": "keyword.control",
+          "match": "randomSleep"
+        },
+        {
+          "name": "constant.numeric",
+          "match": "\\b\\d+\\b"
+        }
+      ]
+    },
+    "keys": {
+      "patterns": [
+        {
+          "name": "constant.character",
+          "match": "(\\b[A-Za-z0-9ŠĐĆČŽšđćčž]+\\b)"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator",
+          "match": "\\+"
+        }
+      ]
+    },
+    "comma": {
+      "patterns": [
+        {
+          "name": "punctuation.separator",
+          "match": ","
+        }
+      ]
+    },
+    "key": {
+      "patterns": [
+        {
+          "name": "keyword",
+          "match": "(rightClick|leftClick|[sS]pace|[eE]sc|[bB]ackspace|[cC]trl|[aA]lt|[Tt]ab|[Ss]hift|[a-zA-ZŠĐĆČŽšđćčž]|F[1-9]|F1[0-2]|[0-9])"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.tm"
+}

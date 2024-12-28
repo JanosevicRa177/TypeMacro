@@ -97,12 +97,10 @@ Every part of the macro sequence is single command which should be registered as
 ```
 
 ### if statements
-A little more complex, if statements can have two variations, one in functions with inputs(not shown in last example to show full power with if and loop together), other with colorpicking on cursor, where we provide Hex value of the color and if mouse is pointing to that color, command will be executed. If also supports elseIf case.
-
-if there is offset in color, there is a way to pick hex color and to register offset in color by +-value, this will mean that if we have Rgb values of (30 30 30(RGB)) it will register color in range (30+-offset 30+-offset 30+-offset(RGB)).
+Classic if statement, if passed parameter or value is true in if, it will execute if part sequence, one of the examples whos strong use of if and loop statements. Currently it supports just if and else, no else if cases. If no else case is passed, nothing will be executed.
 
 
-function if example:
+if example:
 ```
 writeName(trimLetters :boolean): D,U, {if(trimLetters):[S];else:[Š]}, A, N;
 loopName(loopTimes: number) : loop(loopTimes, [writeName(true)]);
@@ -115,17 +113,6 @@ Main {
     V + Ctrl : loop(4, [Tab]), Ctrl + V, loop(2, [Tab]);
     D + Ctrl : loopName(24);
     T + Ctrl : myMinLoop(3);
-};
-```
-
-cursor color example:
-```
-heal(): 1;
-
-Main {
-    Z + Ctrl : Tab;
-    X + Ctrl : Tab + Shift;
-    D + Ctrl : {ifCursor(#FF0000) : [heal()]};
 };
 ```
 

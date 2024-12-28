@@ -1,0 +1,18 @@
+{
+    "MacroSnippet": {
+        "prefix": "macro",
+        "body": "${1:keyCombination} : ${2:sequence};",
+        "description": "Defines a macro with a key combination and action sequence"
+    },
+    "ProgramSnippet": {
+        "prefix": "program",
+        "body": [
+            "keypressDelay = ${1:keypressDelayValue};",
+            "colorOffset = ${2:colorOffsetValue};",
+            "Main {",
+            "    ${3:commands}",
+            "};"
+        ],
+        "description": "Defines the structure for the Program, including keypressDelay, colorOffset, and Main block with commands"
+    }
+}

@@ -1,7 +1,6 @@
-heal(): 1;
-
 Main {
-    Z + ctrl : Tab;
-    X + ctrl : Tab + shift;
-    onColor(#FF0000,  1720, 720) : heal();
+    Z + Ctrl : X + Ctrl;
+    X + Ctrl : Tab + Shift, Ctrl + Z;
+    C + Ctrl : Tab, sleep(250), Ctrl + C, Tab;
+    V + Ctrl : Tab, Tab, Ctrl + V, sleep(1000), Tab;
 };
