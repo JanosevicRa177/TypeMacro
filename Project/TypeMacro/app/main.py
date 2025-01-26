@@ -27,14 +27,20 @@ def load_macros_model(file_path, file_name):
 
 def load_macros():
     [macro_files, file_names] = scan_macro_files()
-    return [load_macros_model(macros, file_name) for macros, file_name in zip(macro_files, file_names)]
+    return [
+        load_macros_model(macros, file_name)
+        for macros, file_name in zip(macro_files, file_names)
+    ]
 
 
 def main():
     macros = load_macros()
     checker = Checker()
-    [checker.detect_cycle(macro_group.full_macros, macro_group.file_name) for macro_group in macros]
-    macro_to_start = [macro for macro in macros if macro.file_name == "test2.tm"]
+    [
+        checker.detect_cycle(macro_group.full_macros, macro_group.file_name)
+        for macro_group in macros
+    ]
+    macro_to_start = [macro for macro in macros if macro.file_name == "test11.tm"]
     interpret(macro_to_start[0])
 
 

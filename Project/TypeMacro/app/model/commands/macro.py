@@ -9,8 +9,5 @@ class Macro(Command):
         self.macro = macro
         self.sequence = sequence
 
-    def run_command(self) -> bool:
-        pass
-
     def get_macro(self) -> MacroCommand:
         return self.macro

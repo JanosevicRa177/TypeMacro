@@ -8,9 +8,5 @@ class Command(ABC):
     sequence: list[SequencePart] | None = None
 
     @abstractmethod
-    def run_command(self) -> bool:
-        pass
-
-    @abstractmethod
     def get_macro(self) -> MacroCommand:
         pass

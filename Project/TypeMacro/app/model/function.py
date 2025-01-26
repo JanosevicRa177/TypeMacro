@@ -8,8 +8,13 @@ class Function(Parent):
         from app.model.converter.converter import interpret_sequence_part
 
         self.name = name
-        self.parameters = [Parameter(parameter.name, parameter.type, index) for index, parameter in enumerate(parameters)]
-        self.sequence = [interpret_sequence_part(sequence_part, self) for sequence_part in sequence]
+        self.parameters = [
+            Parameter(parameter.name, parameter.type, index)
+            for index, parameter in enumerate(parameters)
+        ]
+        self.sequence = [
+            interpret_sequence_part(sequence_part, self) for sequence_part in sequence
+        ]
         self.parent = parent
 
     def get_parameter_by_name(self, name) -> Parameter:

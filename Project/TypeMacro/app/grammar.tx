@@ -72,7 +72,7 @@ MacroCommand:
 ;
 
 AutoPixelColorCommand:
-    'onColor(' color=Color ',' x=INT ',' y=INT ')' ':' sequence+=SequencePart[','] ';'
+    'onColor(' color=Color ',' x=INT ',' y=INT ',' pixel_listen_delay=INT ')' ':' sequence+=SequencePart[','] ';'
 ;
 
 Command:
@@ -80,7 +80,7 @@ Command:
 ;
 
 Key:
-    /rightClick|leftClick|[sS]pace|[eE]sc|[bB]ackspace|[cC]trl|[aA]lt|[Tt]ab|[Ss]hift|[a-zA-ZŠĐĆČŽšđćčž]|F[1-9]|F1[0-2]|[0-9]/
+    /[sS]pace|[eE]sc|[bB]ackspace|[Cc]ommand|[cC]trl|[Ee]nter|[Ff]1[0-2]|[Ff][1-9]|[aA]lt|[Tt]ab|[Ss]hift|[a-zA-ZŠĐĆČŽšđćčž]|[0-9]/
 ;
 
 Color:

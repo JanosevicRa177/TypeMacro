@@ -13,14 +13,17 @@ class SleepCommand(SequencePart):
         self.parent = parent
         self.check_sleep_type(self.sleep)
 
-    def run_part(self) -> bool:
-        pass
-
-    def get_whole_key_sequence(self, function_call: FunctionCall | None) -> list[SequencePart]:
+    def get_whole_key_sequence(
+        self, function_call: FunctionCall | None
+    ) -> list[SequencePart]:
         sleep_value = self.sleep.get_value()
         if self.sleep.parameter_name:
-            parameter = function_call.function.get_parameter_by_name(self.sleep.parameter_name)
-            sleep_value = function_call.resolve_attribute_value(parameter.index).get_value()
+            parameter = function_call.function.get_parameter_by_name(
+                self.sleep.parameter_name
+            )
+            sleep_value = function_call.resolve_attribute_value(
+                parameter.index
+            ).get_value()
         return [MacroCommand(["sleep", str(sleep_value)])]
 
     def check_sleep_type(self, sleep: Attribute):
@@ -29,4 +32,7 @@ class SleepCommand(SequencePart):
         if sleep.parameter_name:
             parameter = self.parent.get_parameter_by_name(sleep.parameter_name)
             if parameter.a_type != Type.NUMBER:
-                raise Exception("Wrong type in random sleep command for parameter: " + parameter.name)
+                raise Exception(
+                    "Wrong type in random sleep command for parameter: "
+                    + parameter.name
+                )

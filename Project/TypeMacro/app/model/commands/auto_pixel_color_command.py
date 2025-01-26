@@ -7,14 +7,19 @@ from app.model.sequence_part.sequence_part import SequencePart
 
 class AutoPixelColorCommand(Command):
 
-    def __init__(self, color: string, x: int, y: int, sequence: list[SequencePart]):
+    def __init__(
+        self,
+        color: string,
+        x: int,
+        y: int,
+        pixel_listen_delay: int,
+        sequence: list[SequencePart],
+    ):
         self.color = color
         self.x = x
         self.y = y
+        self.pixel_listen_delay = pixel_listen_delay
         self.sequence = sequence
 
-    def run_command(self) -> bool:
-        pass
-
     def get_macro(self) -> MacroCommand:
-        return MacroCommand(["cursor", self.color, str(self.x), str(self.y)])
+        return MacroCommand(["color", self.color, str(self.x), str(self.y)])

@@ -10,31 +10,55 @@ from app.utils import flatten_list
 class IfCommand(SequencePart):
     else_sequence: list[SequencePart] | None = None
 
-    def __init__(self, condition, if_sequence: list[SequencePart], else_sequence: list[SequencePart] | None, parent: Parent):
+    def __init__(
+        self,
+        condition,
+        if_sequence: list[SequencePart],
+        else_sequence: list[SequencePart] | None,
+        parent: Parent,
+    ):
         self.condition = Condition(condition)
         self.if_sequence = if_sequence
         if else_sequence is not None:
             self.else_sequence = else_sequence
         self.parent = parent
 
-    def run_part(self) -> bool:
-        pass
-
-    def get_whole_key_sequence(self, function_call: FunctionCall | None) -> list[SequencePart]:
+    def get_whole_key_sequence(
+        self, function_call: FunctionCall | None
+    ) -> list[SequencePart]:
         if self.condition.identifier:
             parameter = self.parent.get_parameter_by_name(self.condition.identifier)
             attribute = function_call.get_attribute_by_index(parameter.index)
             if attribute.bool_value is None:
-                raise Exception("Attribute and parameter missmatch: " + parameter.name + " , " + attribute.get_value())
+                raise Exception(
+                    "Attribute and parameter missmatch: "
+                    + parameter.name
+                    + " , "
+                    + attribute.get_value()
+                )
             elif attribute.bool_value:
-                return flatten_list([sequence_part.get_whole_key_sequence(function_call) for sequence_part in self.if_sequence])
+                return flatten_list(
+                    [
+                        sequence_part.get_whole_key_sequence(function_call)
+                        for sequence_part in self.if_sequence
+                    ]
+                )
             elif self.else_sequence is not None:
-                return flatten_list([sequence_part.get_whole_key_sequence(function_call) for sequence_part in self.else_sequence])
+                return flatten_list(
+                    [
+                        sequence_part.get_whole_key_sequence(function_call)
+                        for sequence_part in self.else_sequence
+                    ]
+                )
             else:
                 return []
         if self.condition.comparison:
-            left_parameter_type = self.get_attribute_type(self.condition.comparison.left)
-            right_parameter_type = self.get_attribute_type(self.condition.comparison.right)
+            left_parameter_type = self.get_attribute_type(
+                self.condition.comparison.left
+            )
+            right_parameter_type = self.get_attribute_type(
+                self.condition.comparison.right
+            )
             if left_parameter_type != right_parameter_type:
                 raise Exception(
                     "Left and right parameter types missmatch: "
@@ -43,9 +67,19 @@ class IfCommand(SequencePart):
                     + self.condition.comparison.right.get_value()
                 )
             if self.condition.comparison.evaluate(function_call):
-                return flatten_list([sequence_part.get_whole_key_sequence(function_call) for sequence_part in self.if_sequence])
+                return flatten_list(
+                    [
+                        sequence_part.get_whole_key_sequence(function_call)
+                        for sequence_part in self.if_sequence
+                    ]
+                )
             elif self.else_sequence is not None:
-                return flatten_list([sequence_part.get_whole_key_sequence(function_call) for sequence_part in self.else_sequence])
+                return flatten_list(
+                    [
+                        sequence_part.get_whole_key_sequence(function_call)
+                        for sequence_part in self.else_sequence
+                    ]
+                )
             else:
                 return []
 

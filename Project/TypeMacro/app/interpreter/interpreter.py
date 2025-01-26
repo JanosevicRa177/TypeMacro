@@ -3,6 +3,7 @@ import time
 from random import randrange
 from time import sleep
 
+import pyautogui
 from pynput.keyboard import Key, Listener, KeyCode, Controller
 
 from app.model.commands.full_macro import FullMacro
@@ -14,24 +15,22 @@ listener: Listener = Listener()
 should_listen = True
 event: threading.Event
 keypress_delay: int | None = None
+color_offset: int | None = None
 
 
 def execute_macro_sequence(macros: list[MacroCommand]):
     keyboard = Controller()
-    sleep(keypress_delay/1000)
     for macro in macros:
         print(macro.keys[0].value)
         if not should_listen:
             break
         if macro.keys[0].value == "sleep":
-            print(sleep)
-            print(macro.keys[1].value)
-            sleep(int(macro.keys[1].value)/1000)
+            sleep(int(macro.keys[1].value) / 1000)
         elif macro.keys[0].value == "random_sleep":
-            random_sleep_value = randrange(int(macro.keys[1].value), int(macro.keys[2].value))
-            print("random_sleep_value", random_sleep_value)
-            print(macro.keys[1].value, macro.keys[2].value)
-            sleep(random_sleep_value/1000)
+            random_sleep_value = randrange(
+                int(macro.keys[1].value), int(macro.keys[2].value)
+            )
+            sleep(random_sleep_value / 1000)
         else:
             for key in macro.keys:
                 keyboard.press(to_key_code(key.value.lower()))
@@ -44,9 +43,24 @@ def listen_to_macro(full_macro: FullMacro):
     global current_keypress_group
     macro_as_set = set([key.value.lower() for key in full_macro.macro.keys])
     while should_listen:
-        time.sleep(keypress_delay/1000)
+        time.sleep(keypress_delay / 1000)
         if current_keypress_group == macro_as_set:
-            thread = threading.Thread(target=execute_macro_sequence, args=[full_macro.sequence])
+            thread = threading.Thread(
+                target=execute_macro_sequence, args=[full_macro.sequence]
+            )
+            thread.daemon = True
+            thread.start()
+
+
+def listen_to_pixel(full_macro: FullMacro):
+    global current_keypress_group
+    color = hex_to_rgb(full_macro.color)
+    while should_listen:
+        time.sleep(full_macro.pixel_listen_delay / 1000)
+        if is_within_color_offset(pyautogui.pixel(full_macro.x, full_macro.y), color):
+            thread = threading.Thread(
+                target=execute_macro_sequence, args=[full_macro.sequence]
+            )
             thread.daemon = True
             thread.start()
 
@@ -54,9 +68,14 @@ def listen_to_macro(full_macro: FullMacro):
 def interpret(macro: MacroGroup):
     global listener
     global keypress_delay
+    global color_offset
     keypress_delay = macro.keypress_delay
+    color_offset = macro.color_offset
     for macro_command in macro.full_macros:
-        thread = threading.Thread(target=listen_to_macro, args=[macro_command])
+        if macro_command.is_auto_pixel:
+            thread = threading.Thread(target=listen_to_pixel, args=[macro_command])
+        else:
+            thread = threading.Thread(target=listen_to_macro, args=[macro_command])
         thread.daemon = True
         thread.start()
     listener = Listener(on_press=on_keypress, on_release=release)
@@ -66,12 +85,16 @@ def interpret(macro: MacroGroup):
 
 def on_keypress(key: Key | KeyCode | None):
     global listener
+    global should_listen
     key_str = map_key_to_string(key)
     current_keypress_group.add(key_str)
+    if {"alt", "f12"}.issubset(current_keypress_group):
+        should_listen = False
+        Listener.stop(listener)
     print(current_keypress_group)
 
 
-def release(key: Key | KeyCode | None) -> bool:
+def release(key: Key | KeyCode | None):
     key_str = map_key_to_string(key)
     current_keypress_group.discard(key_str)
     print(current_keypress_group)
@@ -85,7 +108,29 @@ def map_key_to_string(key: Key | KeyCode | None) -> str:
             key_str = map_specific_keys(key)
     else:
         key_str = key.name
+        if key_str == "cmd":
+            key_str = "command"
     return key_str
+
+
+def is_within_color_offset(rgb1, rgb2):
+    global color_offset
+
+    return all(abs(c1 - c2) <= color_offset for c1, c2 in zip(rgb1, rgb2))
+
+
+def hex_to_rgb(hex_color):
+    hex_color = hex_color.lstrip("#")
+
+    if len(hex_color) != 6:
+        raise ValueError("Invalid hex color. It must be 6 characters long.")
+
+    # Convert hex to RGB
+    r = int(hex_color[0:2], 16)  # Red
+    g = int(hex_color[2:4], 16)  # Green
+    b = int(hex_color[4:6], 16)  # Blue
+
+    return r, g, b
 
 
 def map_specific_keys(key) -> str:
@@ -137,6 +182,8 @@ key_code_map = {
     "esc": Key.esc,
     "space": Key.space,
     "ctrl": Key.ctrl,
+    "alt": Key.alt,
+    "command": Key.cmd,
     "0": "0",
     "1": "1",
     "2": "2",

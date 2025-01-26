@@ -3,5 +3,5 @@ Main {
     X + Ctrl : Tab + Shift;
     C + Ctrl : loop(4, [Tab]), Ctrl + A, loop(2, [Tab]);
     V + Ctrl : loop(4, [Tab]), Ctrl + A, loop(2, [Tab]);
-    A + Ctrl : loop(2, [leftClick]), randomSleep(200,400), loop(2, [shift + Q, Shift + W, Shift + E]);
+    A + Ctrl : randomSleep(200,400), loop(2, [shift + Q, Shift + W, Shift + E]);
 };
