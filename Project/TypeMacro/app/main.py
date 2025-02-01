@@ -1,20 +1,19 @@
 from textx import metamodel_from_file
 import os
 
-from app.interpreter.interpreter import interpret
-from app.loop_checker.checker import Checker
-from app.model.macro_group import MacroGroup
-from app.utils import module_path
+from type_macro.interpreter.interpreter import interpret
+from type_macro.loop_checker.checker import Checker
+from type_macro.model.macro_group import MacroGroup
 
-entity_mm = metamodel_from_file(module_path("grammar.tx"), auto_init_attributes=False)
+entity_mm = metamodel_from_file("src/type_macro/grammar.tx", auto_init_attributes=False)
 
 
 def scan_macro_files():
     macro_files = []
     file_names = []
-    for file in os.listdir(module_path("test-programs")):
+    for file in os.listdir("../test-programs"):
         if file.endswith(".tm"):
-            macro_files.append(os.path.join(module_path("test-programs"), file))
+            macro_files.append(os.path.join("../test-programs", file))
             file_names.append(file)
     return macro_files, file_names
 

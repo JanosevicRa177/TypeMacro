@@ -1,2 +1,14 @@
 [tool.black]
 line-length = 150
+
+[project]
+name = 'type_macro'
+version = '0.0.0'
+description = 'Can be run in the console from anywhere.'
+
+[project.scripts]
+typeMacro = 'type_macro.cli:app'
+
+[build-system]
+requires = ['flit_core>=3.2,<4']
+build-backend = 'flit_core.buildapi'
